@@ -150,6 +150,7 @@ pub enum ItemKind {
 pub struct Item {
     pub kind: ItemKind,
     pub related_items: Vec<Ident>,
+	//Note@wy like ClientStream, ServerStream, Client, Server, etc
     pub tags: Arc<Tags>,
 }
 

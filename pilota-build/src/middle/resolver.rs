@@ -68,6 +68,7 @@ impl PathResolver for DefaultPathResolver {
         Arc::from(segs)
     }
 
+    //Note@wy return related path, for example use `super` to replace the common prefix
     fn related_path(&self, p1: &[Symbol], p2: &[Symbol]) -> FastStr {
         if p1 == p2 {
             return p2.last().unwrap().clone().0;

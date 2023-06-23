@@ -199,6 +199,7 @@ pub enum NodeKind {
     Arg(Arc<Arg>),
 }
 
+//Note@wy diff between rir & ir ？
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct Node {
     pub file_id: FileId,

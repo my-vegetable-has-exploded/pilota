@@ -189,6 +189,7 @@ impl Display for CodegenTy {
                 write!(f, "::std::collections::HashMap<{k}, {v}>")
             }
             CodegenTy::Adt(def) => with_cx(|cx| {
+                //Note@wy fmt at adt, using related item path
                 let path = cx.cur_related_item_path(def.did);
 
                 write!(f, "{path}")

@@ -307,6 +307,7 @@ where
         cx.build(Arc::from(services), source_type, change_case)
     }
 
+	//Note@wy pilota compile  
     pub fn compile_with_config(self, services: Vec<IdlService>, out: Output) {
         let _ = tracing_subscriber::fmt::try_init();
 

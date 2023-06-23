@@ -812,6 +812,7 @@ impl Context {
         self.path_resolver.mod_prefix(self, def_id)
     }
 
+    //Note@wy  get item_path
     pub fn item_path(&self, def_id: DefId) -> Arc<[Symbol]> {
         self.path_resolver.path_for_def_id(self, def_id)
     }
