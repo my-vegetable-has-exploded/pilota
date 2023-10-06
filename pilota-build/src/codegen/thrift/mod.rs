@@ -145,6 +145,7 @@ impl ThriftBackend {
         self.codegen_impl_message(name, encode, size, decode_stream, decode_async_stream)
     }
 
+	//Note@wy Codegen for message encode
     fn codegen_decode(
         &self,
         helper: &DecodeHelper,
@@ -317,6 +318,7 @@ impl ThriftBackend {
         // TODO
     }
 
+	//Note@wy Codegen decode fields  
     fn codegen_decode_fields<'a>(
         &'a self,
         helper: &DecodeHelper,
@@ -421,6 +423,7 @@ impl ThriftBackend {
 }
 
 impl CodegenBackend for ThriftBackend {
+	//Note@wy codegen, generate codec for thrift struct
     fn codegen_struct_impl(&self, def_id: DefId, stream: &mut String, s: &Message) {
         let keep = self.keep_unknown_fields.contains(&def_id);
         let name = self.cx.rust_name(def_id);

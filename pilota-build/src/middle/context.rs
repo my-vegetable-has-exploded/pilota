@@ -101,6 +101,7 @@ impl ContextBuilder {
             keep_unknown_fields: Default::default(),
         }
     }
+	//Note@wy collect all items or used item
     pub(crate) fn collect(&mut self, mode: CollectMode) {
         match mode {
             CollectMode::All => {
@@ -166,6 +167,7 @@ impl ContextBuilder {
         }
     }
 
+	//Note@wy collect related items and sub items
     pub(crate) fn collect_items(&self, input: &[DefId]) -> FxHashSet<DefId> {
         struct PathCollector<'a> {
             set: &'a mut FxHashSet<DefId>,

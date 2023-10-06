@@ -84,6 +84,7 @@ impl<B> Codegen<B>
 where
     B: CodegenBackend + Send,
 {
+	//Note@wy Codegen write_struct
     pub fn write_struct(&self, def_id: DefId, stream: &mut String, s: &rir::Message) {
         let name = self.rust_name(def_id);
 
@@ -425,6 +426,7 @@ where
         ws.write_crates()
     }
 
+	//Note@wy codegen write_items into stream
     pub fn write_items<'a>(&self, stream: &mut String, items: impl Iterator<Item = CodegenItem>)
     where
         B: Send,
@@ -509,6 +511,7 @@ where
         fmt_file(file_name)
     }
 
+	//Note@wy Codegen entry point
     pub fn gen(self) -> anyhow::Result<()> {
         match &*self.mode.clone() {
             Mode::Workspace(info) => self.write_workspace(info.dir.clone()),

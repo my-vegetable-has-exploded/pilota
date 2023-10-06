@@ -54,6 +54,7 @@ impl<'a> CollectDef<'a> {
 }
 
 impl CollectDef<'_> {
+	//Note@wy map item to DefId and insert into resolver table
     fn def_item(&mut self, item: &ir::Item, ns: Namespace) -> DefId {
         let parent = self.parent.as_ref().unwrap();
         let did = self.resolver.did_counter.inc_one();
@@ -147,6 +148,7 @@ impl CollectDef<'_> {
 }
 
 impl ir::visit::Visitor for CollectDef<'_> {
+	//Note@wy walk_file is the entry of the visitor
     fn visit_file(&mut self, file: Arc<ir::File>) {
         self.parent = Some(ModuleId::File(file.id));
         ir::visit::walk_file(self, file);
@@ -390,6 +392,7 @@ impl Resolver {
         Ty { kind, tags_id }
     }
 
+	//Note@wy search recursively in the symbol table
     fn find_path_in_table(
         &self,
         path: &[Ident],
@@ -459,6 +462,7 @@ impl Resolver {
         .copied()
     }
 
+	//Note@wy resolve the path to get DefId
     fn lower_path(&mut self, path: &ir::Path, ns: Namespace, is_args: bool) -> Path {
         let segs = &path.segments;
         let cur_file = self.ir_files.get(self.cur_file.as_ref().unwrap()).unwrap();
@@ -676,6 +680,7 @@ impl Resolver {
         }
     }
 
+	//Note@wy recursively lower an item, make nodes and link them using DefId
     fn lower_item(&mut self, item: &ir::Item) -> Option<DefId> {
         if let ir::ItemKind::Use(_) = &item.kind {
             return None;

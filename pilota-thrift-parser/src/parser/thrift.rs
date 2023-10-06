@@ -16,6 +16,7 @@ use super::super::{
 use crate::{Item, Namespace};
 
 impl Parser for Item {
+	//Note@wy call parse for each item
     fn parse(input: &str) -> IResult<&str, Self> {
         let (input, keyword) = peek(recognize(tuple((
             satisfy(|c| c.is_ascii_alphabetic()),

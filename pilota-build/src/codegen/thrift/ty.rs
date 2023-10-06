@@ -116,6 +116,7 @@ impl ThriftBackend {
         false
     }
 
+	//Note@wy codegen use protocol.write* to encode field
     pub(crate) fn codegen_encode_field(&self, id: i16, ty: &Ty, ident: FastStr) -> FastStr {
         match &ty.kind {
             ty::String => format!("protocol.write_string_field({id}, {ident})?;").into(),

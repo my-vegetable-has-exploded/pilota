@@ -361,6 +361,7 @@ impl ThriftLower {
         }
     }
 
+	//Note@wy lower item
     fn lower_item(&self, item: &thrift_parser::Item) -> Vec<ir::Item> {
         let single = match item {
             thrift_parser::Item::Typedef(t) => ir::ItemKind::NewType(self.lower_typedef(t)),
@@ -519,6 +520,7 @@ impl ThriftLower {
 }
 
 impl Lower<Arc<thrift_parser::File>> for ThriftLower {
+	//Note@wy thrift file lower
     fn lower(&mut self, f: Arc<thrift_parser::File>) -> FileId {
         if let Some(file_id) = self.file_ids_map.get(&f.path) {
             return *file_id;
@@ -530,6 +532,7 @@ impl Lower<Arc<thrift_parser::File>> for ThriftLower {
         self.file_ids_map.insert(f.path.clone(), file_id);
 
         let file = self.with_cur_file(f.clone(), |this| {
+			//Note@wy parser includes
             let include_files = f
                 .items
                 .iter()
@@ -578,6 +581,7 @@ impl Lower<Arc<thrift_parser::File>> for ThriftLower {
                 })
                 .collect::<Vec<(_, FileId)>>();
 
+			//Note@wy parser file package
             let file_package = f
                 .package
                 .as_ref()
@@ -603,6 +607,7 @@ impl Lower<Arc<thrift_parser::File>> for ThriftLower {
                 items: f
                     .items
                     .iter()
+					//Note@wy call lower_item
                     .flat_map(|i| this.lower_item(i))
                     .chain(includes)
                     .map(Arc::from)
@@ -648,6 +653,7 @@ impl super::Parser for ThriftParser {
         self.include_dirs = dirs;
     }
 
+	//Note@wy thrift parser
     fn parse(self) -> super::ParseResult {
         let mut lower = ThriftLower::new(self.db.snapshot(), self.include_dirs.clone());
         let mut input_files = Vec::default();

@@ -39,6 +39,7 @@ impl Parser for Exception {
 }
 
 impl Parser for StructLike {
+	//Note@wy struct parser
     fn parse(input: &str) -> IResult<&str, StructLike> {
         let (r, a) = map(
             tuple((
